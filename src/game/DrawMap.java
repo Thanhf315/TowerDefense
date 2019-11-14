@@ -65,7 +65,7 @@ public class DrawMap {
         g.setFont(new Font("Arial", Font.BOLD, 20));
         MachineGunTower machineguntower = new MachineGunTower(new Coordinate(1500, 350));
         machineguntower.draw(g);
-        g.drawString("MachineGunTower Cost: 300", 1410, 475);
+        g.drawString("MachineGunTower Cost: 200", 1410, 475);
         SniperTower snipertower = new SniperTower(new Coordinate(1500, 500));
         snipertower.draw(g);
         g.drawString("SniperTower Cost: 200", 1450, 625);

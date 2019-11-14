@@ -7,8 +7,7 @@ abstract public class Tower
 {
 	protected Coordinate position;	
 	protected Image tower; 			
-	protected int width;
-	protected int height;
+	protected int width, height;
 	protected double timeSinceLastFire;
 	
 	public void draw(Graphics g)

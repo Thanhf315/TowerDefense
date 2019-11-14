@@ -9,7 +9,10 @@ public class TankerEnemy extends Enemy
 		this.position = p;
 		this.width = 100;
 		this.height = 100;
-		this.speed = 1;
+		this.health = 300;
+		this.speed = 3;
+		this.armor = 5;
+		this.reward = 3;
 	}
 
 }

@@ -7,11 +7,13 @@ import java.util.List;
 
 abstract public class Bullet 
 {
-	protected int posX, posY;
+	protected int posX, posY, range, attack;
 	protected double velocityX, velocityY;
 	protected double ageInSeconds;
 	protected Image picture;
-	
+
+
+
 	public void interact(Game game, double deltaTime)
 	{
 		ageInSeconds += deltaTime;

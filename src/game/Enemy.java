@@ -7,9 +7,7 @@ abstract public class Enemy
 {
 	protected PathPosition position;	
 	protected Image enemy;
-	protected int width;
-	protected int height;
-	protected double speed;
+	protected int width, height, speed, armor, health, reward;
 
 	public void advance()
 	{

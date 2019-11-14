@@ -9,7 +9,10 @@ package game;
 			this.position = p;
 			this.width = 100;
 			this.height = 100;
-			this.speed = 2;
+			this.health = 100;
+			this.speed = 3;
+			this.armor = 3;
+			this.reward = 1;
 		}
 
 	}

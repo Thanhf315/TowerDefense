@@ -11,6 +11,10 @@ public class BossEnemy extends Enemy
 		this.width = 100;
 		this.height = 100;
 		this.speed = 1;
+		this.health = 500;
+		this.speed = 3;
+		this.armor = 8;
+		this.reward = 10;
 	}
 
 }

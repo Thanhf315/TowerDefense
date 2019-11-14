@@ -1,5 +1,7 @@
 package game;
 
+import sun.plugin.liveconnect.LiveConnect;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +15,8 @@ import javax.swing.*;
 import static game.DrawMap.*;
 
 enum GameState { SETUP, UPDATE, DRAW, WAIT, END }
+
+
 
 public class Game implements Runnable{
     private PathPoints line;
@@ -32,7 +36,18 @@ public class Game implements Runnable{
     
     private double elapsedTime;
     private boolean gameIsOver;			
-    private boolean gameIsWon;	
+    private boolean gameIsWon;
+
+	public int[][] Map = {
+			{0, 0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0},
+			{0, 0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0},
+			{0, 0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0},
+			{0, 0 ,1 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0},
+			{1, 0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1},
+			{0, 0 ,0 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,0},
+			{0, 0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+			{1, 1 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0},
+	};
     
     int livesCounter; 					
     int scoreCounter;					
@@ -194,14 +209,13 @@ public class Game implements Runnable{
             return;
 
         new DrawMap(g);
-        /*
+
 		g.setColor(Color.BLACK);
 
-		g.drawString("Lives: "  , 1550, 75);
-		g.drawString("Money Earned: "  , 1550, 100);
-		g.drawString("Enemies Stopped: " , 1550, 125);
+		g.drawString("Lives: "  + livesCounter, 1450, 75);
+		g.drawString("Money Earned: " + scoreCounter , 1450, 100);
+		g.drawString("Enemies Stopped: " +killsCounter, 1450, 125);
 
-*/
         for(Enemy e: new LinkedList<Enemy>(enemies))
 		e.draw(g);
 
@@ -210,12 +224,12 @@ public class Game implements Runnable{
 
 		for(Bullet b: new LinkedList<Bullet>(bullets))
 			b.draw(g);
-
-		/*for(int i= 50; i<=800; i+=50)
+		/*g.setColor(Color.WHITE);
+		for(int i= 50; i<=800; i+=50)
 			g.drawLine(0, i, 1700, i);
 		for(int i= 50; i<=1700; i+=50)
 			g.drawLine(i, 0, i, 800);
-		 */
+		*/
         if(newMachineGunTower != null)
         	newMachineGunTower.draw(g);
         
@@ -280,7 +294,7 @@ public class Game implements Runnable{
     	
     	if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
     		gamePanel.mouseY > 350 && gamePanel.mouseY < 450 &&
-    		gamePanel.mouseIsPressed && scoreCounter >= 300)
+    		gamePanel.mouseIsPressed && scoreCounter >= 200)
     	{	
 	    		placingMachineGunTower= true;
 	    		newMachineGunTower= new MachineGunTower(mouseLocation);
@@ -289,14 +303,19 @@ public class Game implements Runnable{
         	gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
         	gamePanel.mouseIsPressed && placingMachineGunTower
         	&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
-    	{
-                mouseLocation.x = (int)(mouseLocation.x/100)*100;
-                mouseLocation.y = (int)(mouseLocation.y/100)*100;
-	    		newMachineGunTower.setPosition(mouseLocation);
-	    		towers.add(new MachineGunTower(mouseLocation));
-	    		scoreCounter -= 300;
-	    		newMachineGunTower = null;
-	    		placingMachineGunTower = false;
+		{
+			int y = (int) (mouseLocation.x/100);
+			int x = (int) (mouseLocation.y/100);
+			if(Map[x][y]==1) {
+				mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
+				mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
+				newMachineGunTower.setPosition(mouseLocation);
+				towers.add(new MachineGunTower(mouseLocation));
+				scoreCounter -= 200;
+				newMachineGunTower = null;
+				placingMachineGunTower = false;
+				Map[x][y] = 0;
+			}
     	}
     	if(newMachineGunTower != null)
     	{
@@ -320,13 +339,18 @@ public class Game implements Runnable{
 				gamePanel.mouseIsPressed && placingSniperTower
 				&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
 		{
-            mouseLocation.x = (int)(mouseLocation.x/100)*100;
-            mouseLocation.y = (int)(mouseLocation.y/100)*100;
-			newSniperTower.setPosition(mouseLocation);
-			towers.add(new SniperTower(mouseLocation));
-			scoreCounter -= 200;
-			newSniperTower = null;
-			placingSniperTower = false;
+			int y = (int) (mouseLocation.x/100);
+			int x = (int) (mouseLocation.y/100);
+			if(Map[x][y]==1) {
+				mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
+				mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
+				newSniperTower.setPosition(mouseLocation);
+				towers.add(new SniperTower(mouseLocation));
+				scoreCounter -= 200;
+				newSniperTower = null;
+				placingSniperTower = false;
+				Map[x][y] = 0;
+			}
 		}
 
 		if(newSniperTower != null)
@@ -351,13 +375,18 @@ public class Game implements Runnable{
         	gamePanel.mouseIsPressed && placingNormalTower
         	&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
 		{
-		        mouseLocation.x = (int)(mouseLocation.x/100)*100;
-                mouseLocation.y = (int)(mouseLocation.y/100)*100;
-	    		newNormalTower.setPosition(mouseLocation);
-	    		towers.add(new NormalTower(mouseLocation));
-	    		scoreCounter -= 100;
-	    		newNormalTower = null;
-	    		placingNormalTower = false;	
+			int y = (int) (mouseLocation.x/100);
+			int x = (int) (mouseLocation.y/100);
+			if(Map[x][y]==1) {
+				mouseLocation.x = (int) (mouseLocation.x/100)*100;
+				mouseLocation.y = (int) (mouseLocation.y/100)*100;
+				newNormalTower.setPosition(mouseLocation);
+				towers.add(new NormalTower(mouseLocation));
+				scoreCounter -= 100;
+				newNormalTower = null;
+				placingNormalTower = false;
+				Map[x][y] = 0;
+			}
     	}
     	if(newNormalTower != null)
     	{
