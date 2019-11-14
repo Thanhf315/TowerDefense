@@ -33,7 +33,7 @@ abstract public class Bullet
 			if(dist < 40)	
 			{	
 				game.enemies.remove(e);
-				game.scoreCounter += 3;
+				game.scoreCounter += e.reward;
 				game.killsCounter += 1;
 			}
 		}

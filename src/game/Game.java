@@ -1,18 +1,11 @@
 package game;
 
-import sun.plugin.liveconnect.LiveConnect;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import static game.DrawMap.*;
 
 enum GameState { SETUP, UPDATE, DRAW, WAIT, END }
 
@@ -216,20 +209,22 @@ public class Game implements Runnable{
 		g.drawString("Money Earned: " + scoreCounter , 1450, 100);
 		g.drawString("Enemies Stopped: " +killsCounter, 1450, 125);
 
-        for(Enemy e: new LinkedList<Enemy>(enemies))
-		e.draw(g);
-
 		for(Tower t: new LinkedList<Tower>(towers))
 			t.draw(g);
 
+        for(Enemy e: new LinkedList<Enemy>(enemies))
+		e.draw(g);
+
+
+
 		for(Bullet b: new LinkedList<Bullet>(bullets))
 			b.draw(g);
-		/*g.setColor(Color.WHITE);
+		g.setColor(Color.WHITE);
 		for(int i= 50; i<=800; i+=50)
 			g.drawLine(0, i, 1700, i);
 		for(int i= 50; i<=1700; i+=50)
 			g.drawLine(i, 0, i, 800);
-		*/
+
         if(newMachineGunTower != null)
         	newMachineGunTower.draw(g);
         

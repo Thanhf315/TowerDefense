@@ -28,14 +28,15 @@ public class NormalTower extends Tower
 			
 			Coordinate enemyPos = e.getPosition().getCoordinate();
 			double dx, dy, d;
-			dx = enemyPos.x - position.x; 
-			dy = enemyPos.y - position.y;
+			dx = enemyPos.x - position.x - 50;
+			dy = enemyPos.y - position.y - 50;
 			d = Math.sqrt((dx*dx) + (dy*dy));
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
 			if(d < 80)
-			{	NormalBullet normalbullet = new NormalBullet(pos, enemyPos);
+			{
+				NormalBullet normalbullet = new NormalBullet(pos, enemyPos);
 				game.bullets.add(normalbullet);
 				timeSinceLastFire = 0;
 				return;
