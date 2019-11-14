@@ -289,7 +289,9 @@ public class Game implements Runnable{
         	gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
         	gamePanel.mouseIsPressed && placingMachineGunTower
         	&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
-    	{	
+    	{
+                mouseLocation.x = (int)(mouseLocation.x/100)*100;
+                mouseLocation.y = (int)(mouseLocation.y/100)*100;
 	    		newMachineGunTower.setPosition(mouseLocation);
 	    		towers.add(new MachineGunTower(mouseLocation));
 	    		scoreCounter -= 300;
@@ -313,11 +315,13 @@ public class Game implements Runnable{
 			placingSniperTower = true;
 			newSniperTower = new SniperTower(mouseLocation);
 		}
-		else if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1400 &&
+		else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
 				gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
 				gamePanel.mouseIsPressed && placingSniperTower
 				&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
 		{
+            mouseLocation.x = (int)(mouseLocation.x/100)*100;
+            mouseLocation.y = (int)(mouseLocation.y/100)*100;
 			newSniperTower.setPosition(mouseLocation);
 			towers.add(new SniperTower(mouseLocation));
 			scoreCounter -= 200;
@@ -347,6 +351,8 @@ public class Game implements Runnable{
         	gamePanel.mouseIsPressed && placingNormalTower
         	&& line.distanceToPath(gamePanel.mouseX, gamePanel.mouseY) > 60)
 		{
+		        mouseLocation.x = (int)(mouseLocation.x/100)*100;
+                mouseLocation.y = (int)(mouseLocation.y/100)*100;
 	    		newNormalTower.setPosition(mouseLocation);
 	    		towers.add(new NormalTower(mouseLocation));
 	    		scoreCounter -= 100;
