@@ -7,14 +7,14 @@ import java.util.List;
 
 abstract public class Bullet 
 {
-	protected int posX, posY, range, attack;
+	protected int posX, posY, strength;
 	protected double velocityX, velocityY;
 	protected double ageInSeconds;
 	protected Image picture;
 
 
 
-	public void interact(Game game, double deltaTime)
+	public void interact(Game game, double deltaTime, Bullet b)
 	{
 		ageInSeconds += deltaTime;
 		posX += velocityX*deltaTime;
@@ -30,11 +30,15 @@ abstract public class Bullet
 			
 			dist = Math.sqrt((dx*dx) + (dy*dy));
 			
-			if(dist < 40)	
-			{	
-				game.enemies.remove(e);
-				game.scoreCounter += e.reward;
-				game.killsCounter += 1;
+			if(dist  <=50)
+			{
+				if(e.health<= 0 ) {
+					game.enemies.remove(e);
+					game.scoreCounter += e.reward;
+					game.killsCounter += 1;
+				} else {
+					game.updatehealth(e, b);
+				}
 			}
 		}
 	}

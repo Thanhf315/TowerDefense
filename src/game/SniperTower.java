@@ -27,14 +27,14 @@ public class SniperTower extends Tower
 		{	
 			
 			Coordinate enemyPos = e.getPosition().getCoordinate();
-			double dx, dy, d;
+			double dx, dy, dist;
 			dx = enemyPos.x - position.x; 
 			dy = enemyPos.y - position.y;
-			d = Math.sqrt((dx*dx) + (dy*dy));
+			dist = Math.sqrt((dx*dx) + (dy*dy));
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
-			if(d < 120)
+			if(dist <= 300)
 			{	SniperBullet sniperbullet = new SniperBullet(pos, enemyPos);
 				game.bullets.add(sniperbullet);
 				timeSinceLastFire = 0;

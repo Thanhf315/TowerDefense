@@ -12,6 +12,7 @@ public class MachineGunBullet extends Bullet
         this.velocityX = target.x - this.posX;
         this.velocityY = target.y - this.posY;
         this.ageInSeconds = 0;
+        this.strength = 20;
     }
 }
 
