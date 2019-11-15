@@ -2,11 +2,9 @@ package game;
 
 import java.util.List;
 
-public class SniperTower extends Tower
-{
+public class SniperTower extends Tower {
 
-	public SniperTower(Coordinate pos)
-	{
+	public SniperTower(Coordinate pos) {
 		ImageLoader loader = ImageLoader.getLoader();
 		this.tower = loader.getImage("resources/SniperTower.png");
 		this.position = pos;
@@ -14,8 +12,7 @@ public class SniperTower extends Tower
 		this.height = 50;
 	}
 	
-	public void interact(Game game, double deltaTime)
-	{
+	public void interact(Game game, double deltaTime) {
 		timeSinceLastFire += deltaTime;
 		
 		if(timeSinceLastFire < 1)
@@ -23,8 +20,7 @@ public class SniperTower extends Tower
 		
 		List<Enemy> enemies = game.enemies;
 		
-		for(Enemy e: enemies)
-		{	
+		for(Enemy e: enemies) {
 			
 			Coordinate enemyPos = e.getPosition().getCoordinate();
 			double dx, dy, dist;

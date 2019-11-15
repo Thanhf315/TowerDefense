@@ -1,10 +1,8 @@
 
 package game;
 
-public class MachineGunBullet extends Bullet
-{
-    public MachineGunBullet(Coordinate pos, Coordinate target)
-    {
+public class MachineGunBullet extends Bullet {
+    public MachineGunBullet(Coordinate pos, Coordinate target) {
         ImageLoader loader = ImageLoader.getLoader();
         this.picture = loader.getImage("resources/MachineGunBullet.png");
         this.posX = pos.x;

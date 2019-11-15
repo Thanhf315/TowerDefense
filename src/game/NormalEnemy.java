@@ -1,9 +1,7 @@
 package game;
 
-	public class NormalEnemy extends Enemy 
-	{
-		NormalEnemy(PathPosition p)
-		{
+	public class NormalEnemy extends Enemy {
+		NormalEnemy(PathPosition p) {
 			ImageLoader loader = ImageLoader.getLoader();
 			this.enemy = loader.getImage("resources/NormalEnemy.png");
 			this.position = p;

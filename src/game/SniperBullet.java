@@ -1,9 +1,7 @@
 package game;
 
-public class SniperBullet extends Bullet 
-{
-	public SniperBullet(Coordinate pos, Coordinate target)
-	{
+public class SniperBullet extends Bullet {
+	public SniperBullet(Coordinate pos, Coordinate target) {
 		ImageLoader loader = ImageLoader.getLoader();
 		this.picture = loader.getImage("resources/SniperBullet.png");
 		this.posX = pos.x;

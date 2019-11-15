@@ -3,8 +3,7 @@ package game;
 import java.awt.Graphics;
 import java.awt.Image;
 
-abstract public class Tower 
-{
+abstract public class Tower {
 	protected Coordinate position;	
 	protected Image tower; 			
 	protected int width, height;

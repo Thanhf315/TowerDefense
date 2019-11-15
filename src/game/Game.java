@@ -164,11 +164,6 @@ public class Game implements Runnable{
 		e.draw(g);
 		for(Bullet b: new LinkedList<Bullet>(bullets))
 			b.draw(g);
-		/*g.setColor(Color.WHITE);
-		for(int i= 50; i<=800; i+=50)
-			g.drawLine(0, i, 1700, i);
-		for(int i= 50; i<=1700; i+=50)
-			g.drawLine(i, 0, i, 800);*/
 
         if(newMachineGunTower != null)
         	newMachineGunTower.draw(g);
@@ -183,39 +178,35 @@ public class Game implements Runnable{
         if(livesCounter <= 0)
         	g.drawImage(endGame, 0, 0, null);
 
-		if(killsCounter >= 500) {	g.setFont(new Font("Braggadocio", Font.ITALIC, 90));
+		if(killsCounter >= 500) {
+			g.setFont(new Font("Braggadocio", Font.ITALIC, 90));
         	g.drawString("You Win!!!", 10, 250);
 		}
         state = GameState.WAIT;
     }
 
     public void generateEnemies() {
-    	if(frameCounter % 30 == 0)
-    	{
+    	if(frameCounter % 30 == 0) {
     		enemies.add(new NormalEnemy(line.getStart()));
     	}
- 		else if(frameCounter % 25 == 0 && frameCounter >= 50)
- 		{
+ 		else if(frameCounter % 25 == 0 && frameCounter >= 50) {
  			enemies.add(new NormalEnemy(line.getStart()));
+
  		}
-	 	else if(frameCounter % 20 == 0 && frameCounter >= 100)
-	 	{
+	 	else if(frameCounter % 20 == 0 && frameCounter >= 100) {
 	 		enemies.add(new NormalEnemy(line.getStart()));
 	 		enemies.add(new SmallerEnemy(line.getStart()));
 	 	}
- 		else if(frameCounter % 15 == 0 && frameCounter >= 150)
- 		{
+ 		else if(frameCounter % 15 == 0 && frameCounter >= 150) {
  			enemies.add(new NormalEnemy(line.getStart()));
  			enemies.add(new SmallerEnemy(line.getStart()));
  		}
-	 	else if(frameCounter % 10 == 0 && frameCounter >= 200)
-	 	{
+	 	else if(frameCounter % 10 == 0 && frameCounter >= 200) {
 	 		enemies.add(new NormalEnemy(line.getStart()));
 	 		enemies.add(new SmallerEnemy(line.getStart()));
 	 		enemies.add(new TankerEnemy(line.getStart()));
 	 	}
-	 	else if(frameCounter % 5 == 0 && frameCounter >= 250)
-	 	{
+	 	else if(frameCounter % 5 == 0 && frameCounter >= 250) {
 	 		enemies.add(new NormalEnemy(line.getStart()));
 	 		enemies.add(new SmallerEnemy(line.getStart()));
 	 		enemies.add(new TankerEnemy(line.getStart()));
@@ -223,23 +214,21 @@ public class Game implements Runnable{
 	 	}
     }
 
-    public void placeMachineGunTower()
-    {
+    public void placeMachineGunTower() {
     	Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
 		int x = (int) (mouseLocation.x / 100);
 		int y = (int) (mouseLocation.y / 100);
 		if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
     		gamePanel.mouseY > 350 && gamePanel.mouseY < 450 &&
-    		gamePanel.mouseIsPressed && scoreCounter >= 200)
-    	{
+    		gamePanel.mouseIsPressed && scoreCounter >= 200) {
 
 	    		placingMachineGunTower= true;
 	    		newMachineGunTower= new MachineGunTower(mouseLocation);
     	}
     	else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
         	gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
-        	gamePanel.mouseIsPressed && placingMachineGunTower && Map[y][x] == 1)
-    	{
+        	gamePanel.mouseIsPressed && placingMachineGunTower && Map[y][x] == 1) {
+
     		mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
     		mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
     		newMachineGunTower.setPosition(mouseLocation);
@@ -257,22 +246,21 @@ public class Game implements Runnable{
 
     }
 
-	public void placeSniperTowers()
-	{
+	public void placeSniperTowers() {
 		Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
 		int x = (int) (mouseLocation.x/100);
 		int y = (int) (mouseLocation.y/100);
 		if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
 				gamePanel.mouseY > 500 && gamePanel.mouseY < 600 &&
-				gamePanel.mouseIsPressed && scoreCounter >= 200)
-		{
+				gamePanel.mouseIsPressed && scoreCounter >= 200) {
+
 			placingSniperTower = true;
 			newSniperTower = new SniperTower(mouseLocation);
 		}
 		else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
 				gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
-				gamePanel.mouseIsPressed && placingSniperTower && Map[y][x]==1)
-		{
+				gamePanel.mouseIsPressed && placingSniperTower && Map[y][x]==1) {
+
 			mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
 			mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
 			newSniperTower.setPosition(mouseLocation);
@@ -290,24 +278,21 @@ public class Game implements Runnable{
 		}
 	}
 
-
-
-    public void placeNormalTower()
-    {
+    public void placeNormalTower() {
     	Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
 		int x = (int) (mouseLocation.x/100);
 		int y = (int) (mouseLocation.y/100);
     	if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
     		gamePanel.mouseY > 650 && gamePanel.mouseY < 750 &&
-    		gamePanel.mouseIsPressed && scoreCounter >= 100)
-    	{
+    		gamePanel.mouseIsPressed && scoreCounter >= 100) {
+
 	    		placingNormalTower = true;
 	    		newNormalTower = new NormalTower(mouseLocation);
     	}
     	else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
         	gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
-        	gamePanel.mouseIsPressed && placingNormalTower && Map[y][x]==1)
-    	{
+        	gamePanel.mouseIsPressed && placingNormalTower && Map[y][x]==1) {
+
 			mouseLocation.x = (int) (mouseLocation.x/100)*100;
 			mouseLocation.y = (int) (mouseLocation.y/100)*100;
 			newNormalTower.setPosition(mouseLocation);
@@ -324,7 +309,7 @@ public class Game implements Runnable{
     		newNormalTower.setPosition(mouseLocation);
     	}
     }
-
+	Graphics g;
 	public void updatehealth(Enemy e, Bullet b) {
 		e.health -= (b.strength-e.armor);
 	}

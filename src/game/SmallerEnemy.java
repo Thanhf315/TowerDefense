@@ -1,10 +1,8 @@
 package game;
 
 
-public class SmallerEnemy extends Enemy 
-{
-	SmallerEnemy(PathPosition p)
-	{
+public class SmallerEnemy extends Enemy {
+	SmallerEnemy(PathPosition p) {
 		ImageLoader loader = ImageLoader.getLoader();
 		this.enemy = loader.getImage("resources/SmallerEnemy.png");
 		this.position = p;
@@ -14,8 +12,6 @@ public class SmallerEnemy extends Enemy
 		this.speed = 4;
 		this.armor = 0;
 		this.reward = 2;
-
 	}
-
 }
 

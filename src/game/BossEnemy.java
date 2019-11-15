@@ -1,10 +1,7 @@
 package game;
 
-public class BossEnemy extends Enemy 
-{
-
-	BossEnemy(PathPosition p)
-	{
+public class BossEnemy extends Enemy {
+	BossEnemy(PathPosition p) {
 		ImageLoader loader = ImageLoader.getLoader();
 		this.enemy = loader.getImage("resources/BossEnemy.png");
 		this.position = p;
@@ -16,6 +13,5 @@ public class BossEnemy extends Enemy
 		this.armor = 8;
 		this.reward = 10;
 	}
-
 }
 

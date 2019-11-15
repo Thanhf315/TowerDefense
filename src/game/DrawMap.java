@@ -72,6 +72,5 @@ public class DrawMap {
         NormalTower NormalTower = new NormalTower(new Coordinate(1500, 650));
         NormalTower.draw(g);
         g.drawString("NormalTower Cost: 100", 1450, 775);
-
     }
 }

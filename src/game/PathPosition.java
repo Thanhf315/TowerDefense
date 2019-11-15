@@ -2,15 +2,13 @@ package game;
 
 import java.util.List;
 
-public class PathPosition
-{	
+public class PathPosition {
 	
 	private int segment;			
 	private double percentage;		
 	private List <Coordinate> path;	
 	
-	PathPosition(List<Coordinate> points)
-	{	
+	PathPosition(List<Coordinate> points) {
 		this.segment = 0;		
 		this.percentage = 0;	
 		this.path = points;	
@@ -21,8 +19,7 @@ public class PathPosition
     	return segment == path.size()-1;	
     }
     
-    public Coordinate getCoordinate ()
-    {	
+    public Coordinate getCoordinate () {
     	if(isAtTheEnd())
     		return path.get(path.size()-1);
     	
@@ -41,8 +38,7 @@ public class PathPosition
         return new Coordinate(ballX, ballY);    
     }
     
-    public void advance (double distance)
-    {	
+    public void advance (double distance) {
         if(isAtTheEnd())
         	return;		
     	int startX = path.get(segment).x;
@@ -57,8 +53,7 @@ public class PathPosition
     	double length = Math.sqrt((double) (dX*dX) + (double) (dY*dY));
     	double unit = 1/length;	
     	percentage += unit*distance;	
-    	if(percentage > 1)
-    	{
+    	if(percentage > 1) {
     		segment ++;										
     		distance = distance-(1-percentage)*length;	
     		percentage = 0;									

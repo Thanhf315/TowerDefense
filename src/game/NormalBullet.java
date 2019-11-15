@@ -1,9 +1,7 @@
 package game;
 
-public class NormalBullet extends Bullet 
-{
-	public NormalBullet(Coordinate pos, Coordinate target)
-	{
+public class NormalBullet extends Bullet {
+	public NormalBullet(Coordinate pos, Coordinate target) {
 		ImageLoader loader = ImageLoader.getLoader();
 		this.picture = loader.getImage("resources/NormalBullet.png");
 		this.posX = pos.x;
