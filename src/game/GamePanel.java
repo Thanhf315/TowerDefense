@@ -10,18 +10,19 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = -266426690684141363L;
 
-    private Game enclosingGame;  	
+    private GameField enclosingGame;
     public int mouseX;				
     public int mouseY;			
-    public boolean mouseIsPressed;	
-    
-    public GamePanel (Game enclosingGame) {
-    	this.addMouseListener(this); 			
-    	this.addMouseMotionListener(this);		
+    public boolean mouseIsPressed;
+
+    public GamePanel (GameField enclosingGame) {
+    	this.addMouseListener(this);
+    	this.addMouseMotionListener(this);
         this.enclosingGame = enclosingGame;
     }
-    
-    public void paintComponent (Graphics g)
+
+
+	public void paintComponent (Graphics g)
     {
         enclosingGame.draw (g);
     }

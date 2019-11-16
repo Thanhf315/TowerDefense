@@ -2,8 +2,7 @@ package game;
 
 import java.awt.*;
 
-abstract public class Enemy 
-{
+abstract public class Enemy implements GameEntity {
 	protected PathPosition position;	
 	protected Image enemy;
 	protected int width, height, speed, armor, health, reward;
@@ -12,8 +11,7 @@ abstract public class Enemy
 		position.advance(10 + speed);
 	}
 	
-	public void draw(Graphics g)
-	{
+	public void draw(Graphics g) {
 		Coordinate c = position.getCoordinate();
 		g.drawImage(enemy, c.x - width/2 , c.y - height/2, null);
 		g.setColor(Color.RED);

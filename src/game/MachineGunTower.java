@@ -12,7 +12,7 @@ public class MachineGunTower extends Tower {
         this.height = 50;
     }
 
-    public void interact(Game game, double deltaTime) {
+    public void interact(GameField game, double deltaTime) {
         timeSinceLastFire += deltaTime;
         if(timeSinceLastFire < 1)
             return;
@@ -28,7 +28,7 @@ public class MachineGunTower extends Tower {
 
             Coordinate pos = new Coordinate(position.x, position.y);
 
-            if(dist <= 200) {
+            if(dist <= 225) {
                 MachineGunBullet machinegunbullet = new MachineGunBullet(pos, enemyPos);
                 game.bullets.add(machinegunbullet);
                 timeSinceLastFire = 0;

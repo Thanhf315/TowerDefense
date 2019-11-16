@@ -12,7 +12,7 @@ public class SniperTower extends Tower {
 		this.height = 50;
 	}
 	
-	public void interact(Game game, double deltaTime) {
+	public void interact(GameField game, double deltaTime) {
 		timeSinceLastFire += deltaTime;
 		
 		if(timeSinceLastFire < 1)
@@ -30,7 +30,7 @@ public class SniperTower extends Tower {
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
-			if(dist <= 300)
+			if(dist <= 325)
 			{	SniperBullet sniperbullet = new SniperBullet(pos, enemyPos);
 				game.bullets.add(sniperbullet);
 				timeSinceLastFire = 0;

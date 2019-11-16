@@ -11,7 +11,7 @@ public class NormalTower extends Tower {
 		this.height = 50;
 	}
 	
-	public void interact(Game game, double deltaTime) {
+	public void interact(GameField game, double deltaTime) {
 		timeSinceLastFire += deltaTime;
 		
 		if(timeSinceLastFire < 1)
@@ -29,7 +29,7 @@ public class NormalTower extends Tower {
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
-			if(dist <= 100) {
+			if(dist <= 125) {
 				NormalBullet normalbullet = new NormalBullet(pos, enemyPos);
 				game.bullets.add(normalbullet);
 				timeSinceLastFire = 0;
