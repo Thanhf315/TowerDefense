@@ -14,7 +14,7 @@ public class NormalTower extends Tower {
 	public void interact(GameField game, double deltaTime) {
 		timeSinceLastFire += deltaTime;
 		
-		if(timeSinceLastFire < 1)
+		if(timeSinceLastFire < 1.5)
 			return;
 		
 		List<Enemy> enemies = game.enemies;

@@ -15,13 +15,13 @@ public class SniperTower extends Tower {
 	public void interact(GameField game, double deltaTime) {
 		timeSinceLastFire += deltaTime;
 		
-		if(timeSinceLastFire < 1)
+		if(timeSinceLastFire < 2)
 			return;
 		
 		List<Enemy> enemies = game.enemies;
 		
 		for(Enemy e: enemies) {
-			
+
 			Coordinate enemyPos = e.getPosition().getCoordinate();
 			double dx, dy, dist;
 			dx = enemyPos.x - position.x; 

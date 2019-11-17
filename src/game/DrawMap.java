@@ -1,8 +1,6 @@
 package game;
 
 import java.awt.*;
-import java.io.InputStream;
-import java.util.Scanner;
 
 public class DrawMap {
     private Image backdrop;
@@ -65,14 +63,14 @@ public class DrawMap {
         g.fillRect(1400, 0, 300, 800);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        MachineGunTower machineguntower = new MachineGunTower(new Coordinate(1500, 350));
-        machineguntower.draw(g);
-        g.drawString("MachineGunTower Cost: 200", 1410, 475);
-        SniperTower snipertower = new SniperTower(new Coordinate(1500, 500));
+        SniperTower snipertower = new SniperTower(new Coordinate(1500, 350));
         snipertower.draw(g);
-        g.drawString("SniperTower Cost: 200", 1450, 625);
-        NormalTower NormalTower = new NormalTower(new Coordinate(1500, 650));
-        NormalTower.draw(g);
+        g.drawString("SniperTower Cost: 300", 1450, 475);
+        MachineGunTower machineguntower = new MachineGunTower(new Coordinate(1500, 500));
+        machineguntower.draw(g);
+        g.drawString("MachineGunTower Cost: 200", 1410, 625);
+        NormalTower normaltower = new NormalTower(new Coordinate(1500, 650));
+        normaltower.draw(g);
         g.drawString("NormalTower Cost: 100", 1450, 775);
 
 

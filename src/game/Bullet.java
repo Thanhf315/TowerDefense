@@ -8,15 +8,14 @@ import java.util.List;
 abstract public class Bullet implements GameEntity {
 	protected int posX, posY, strength;
 	protected double velocityX, velocityY;
-	protected double ageInSeconds;
+	protected double TTL;
 	protected Image picture;
+
+	public abstract void updatepos(double deltaTime);
+	public abstract void updateTTL(double deltaTime);
 
 	public void interact(GameField game, double deltaTime, Bullet b) {
 
-		ageInSeconds += deltaTime;
-		posX += velocityX*deltaTime;
-		posY += velocityY*deltaTime;
-		
 		List<Enemy> enemies = game.enemies;
 		for(Enemy e: new LinkedList<Enemy>(enemies)) {
 			double dx, dy, dist;
@@ -39,6 +38,6 @@ abstract public class Bullet implements GameEntity {
 	}
 	
 	public boolean isDone() {
-		return ageInSeconds >= 1;
+		return TTL >= 1;
 	}
 }

@@ -73,7 +73,7 @@ public class GameField implements Runnable{
         f.setVisible(true);
 
         livesCounter = 10;
-        scoreCounter = 2000;
+        scoreCounter = 1000;
         killsCounter = 0;
 
         frameCounter = 0;
@@ -126,6 +126,8 @@ public class GameField implements Runnable{
             t.interact(this, elapsedTime);
         }
         for (Bullet b : new LinkedList<Bullet>(bullets)) {
+            b.updatepos(elapsedTime);
+            b.updateTTL(elapsedTime);
             b.interact(this, elapsedTime, b);
             if (b.isDone())
                 bullets.remove(b);
@@ -222,12 +224,50 @@ public class GameField implements Runnable{
         }
     }
 
+    public void placeSniperTowers() {
+        Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
+        int x = (int) (mouseLocation.x/100);
+        int y = (int) (mouseLocation.y/100);
+        if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
+                gamePanel.mouseY > 350 && gamePanel.mouseY < 450 &&
+                gamePanel.mouseIsPressed && scoreCounter >= 300) {
+
+            placingSniperTower = true;
+            newSniperTower = new SniperTower(mouseLocation);
+        }
+        else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
+                gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
+                gamePanel.mouseIsPressed && placingSniperTower && Map[y][x]==1) {
+
+            mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
+            mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
+            newSniperTower.setPosition(mouseLocation);
+            towers.add(new SniperTower(mouseLocation));
+            scoreCounter -= 300;
+            newSniperTower = null;
+            placingSniperTower = false;
+            Map[y][x] = 0;
+        }
+        else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
+                gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
+                gamePanel.mouseIsPressed && placingSniperTower && Map[y][x]==0) {
+            newSniperTower = null;
+            placingSniperTower = false;
+        }
+        if(newSniperTower != null)
+        {
+            mouseLocation.x -= 50;
+            mouseLocation.y -= 50;
+            newSniperTower.setPosition(mouseLocation);
+        }
+    }
+
     public void placeMachineGunTower() {
         Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
         int x = (int) (mouseLocation.x / 100);
         int y = (int) (mouseLocation.y / 100);
         if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
-                gamePanel.mouseY > 350 && gamePanel.mouseY < 450 &&
+                gamePanel.mouseY > 500 && gamePanel.mouseY < 600 &&
                 gamePanel.mouseIsPressed && scoreCounter >= 200) {
 
             placingMachineGunTower= true;
@@ -246,6 +286,12 @@ public class GameField implements Runnable{
             placingMachineGunTower = false;
             Map[y][x] = 0;
         }
+        else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
+                gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
+                gamePanel.mouseIsPressed && placingMachineGunTower && Map[y][x]==0) {
+            newMachineGunTower = null;
+            placingMachineGunTower = false;
+        }
         if (newMachineGunTower != null) {
             mouseLocation.x -= 50;
             mouseLocation.y -= 50;
@@ -254,37 +300,6 @@ public class GameField implements Runnable{
 
     }
 
-    public void placeSniperTowers() {
-        Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
-        int x = (int) (mouseLocation.x/100);
-        int y = (int) (mouseLocation.y/100);
-        if(gamePanel.mouseX > 1500 && gamePanel.mouseX < 1600 &&
-                gamePanel.mouseY > 500 && gamePanel.mouseY < 600 &&
-                gamePanel.mouseIsPressed && scoreCounter >= 200) {
-
-            placingSniperTower = true;
-            newSniperTower = new SniperTower(mouseLocation);
-        }
-        else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
-                gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
-                gamePanel.mouseIsPressed && placingSniperTower && Map[y][x]==1) {
-
-            mouseLocation.x = (int) (mouseLocation.x / 100) * 100;
-            mouseLocation.y = (int) (mouseLocation.y / 100) * 100;
-            newSniperTower.setPosition(mouseLocation);
-            towers.add(new SniperTower(mouseLocation));
-            scoreCounter -= 200;
-            newSniperTower = null;
-            placingSniperTower = false;
-            Map[y][x] = 0;
-        }
-        if(newSniperTower != null)
-        {
-            mouseLocation.x -= 50;
-            mouseLocation.y -= 50;
-            newSniperTower.setPosition(mouseLocation);
-        }
-    }
 
     public void placeNormalTower() {
         Coordinate mouseLocation = new Coordinate(gamePanel.mouseX, gamePanel.mouseY);
@@ -309,6 +324,12 @@ public class GameField implements Runnable{
             newNormalTower = null;
             placingNormalTower = false;
             Map[y][x] = 0;
+        }
+        else if(gamePanel.mouseX > 0 && gamePanel.mouseX < 1400 &&
+                gamePanel.mouseY > 0 && gamePanel.mouseY < 800 &&
+                gamePanel.mouseIsPressed && placingNormalTower && Map[y][x]==0) {
+            newNormalTower = null;
+            placingNormalTower = false;
         }
         if(newNormalTower != null)
         {
