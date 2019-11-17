@@ -6,7 +6,7 @@ import java.awt.Image;
 abstract public class Tower implements GameEntity, GameTile {
 	protected Coordinate position;	
 	protected Image tower; 			
-	protected int width, height;
+	protected int width, height, range;
 	protected double timeSinceLastFire;
 	
 	public void draw(Graphics g)

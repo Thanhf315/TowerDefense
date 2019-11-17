@@ -9,6 +9,7 @@ public class NormalTower extends Tower {
 		this.position = pos;
 		this.width = 50;
 		this.height = 50;
+		this.range = 125;
 	}
 	
 	public void interact(GameField game, double deltaTime) {
@@ -23,13 +24,13 @@ public class NormalTower extends Tower {
 			
 			Coordinate enemyPos = e.getPosition().getCoordinate();
 			double dx, dy, dist;
-			dx = enemyPos.x - position.x - 50;
-			dy = enemyPos.y - position.y - 50;
+			dx = enemyPos.x - position.x ;
+			dy = enemyPos.y - position.y ;
 			dist = Math.sqrt((dx*dx) + (dy*dy));
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
-			if(dist <= 125) {
+			if(dist <= range) {
 				NormalBullet normalbullet = new NormalBullet(pos, enemyPos);
 				game.bullets.add(normalbullet);
 				timeSinceLastFire = 0;

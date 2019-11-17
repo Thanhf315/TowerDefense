@@ -10,6 +10,7 @@ public class SniperTower extends Tower {
 		this.position = pos;
 		this.width = 50;
 		this.height = 50;
+		this.range = 325;
 	}
 	
 	public void interact(GameField game, double deltaTime) {
@@ -30,12 +31,13 @@ public class SniperTower extends Tower {
 			
 			Coordinate pos = new Coordinate(position.x, position.y);	
 			
-			if(dist <= 325)
+			if(dist <= range)
 			{	SniperBullet sniperbullet = new SniperBullet(pos, enemyPos);
 				game.bullets.add(sniperbullet);
 				timeSinceLastFire = 0;
 				return;
 			}	
 		} 
-	}	
+	}
+
 }

@@ -24,8 +24,9 @@ abstract public class Bullet implements GameEntity {
 			dist = Math.sqrt((dx*dx) + (dy*dy));
 			if(e.health<=0) {
 				game.enemies.remove(e);
-				game.scoreCounter += e.reward;
-				game.killsCounter += 1;
+				game.Reward += e.reward;
+				game.frameCounter++;
+				game.killsCounter++;
 			}
 			else if (dist<=50) {
 				game.updatehealth(e,b);

@@ -4,50 +4,38 @@ import java.util.List;
 
 public class PathPosition {
 	
-	private int segment;			
-	private double percentage;		
-	private List <Coordinate> path;	
+	private int pos;
+	private List <Coordinate> line;
 	
 	PathPosition(List<Coordinate> points) {
-		this.segment = 0;		
-		this.percentage = 0;	
-		this.path = points;	
+		this.pos = 0;
+		this.line = points;
 	}
 	
     public boolean isAtTheEnd ()
     {   
-    	return segment == path.size()-1;	
+    	return pos == line.size()-1;
     }
     
     public Coordinate getCoordinate () {
-    	if(isAtTheEnd())
-    		return path.get(path.size()-1);
-    	
-    	int startX = path.get(segment).x;
-    	int endX = path.get(segment + 1).x;
-    	
-    	int startY = path.get(segment).y;
-    	int endY = path.get(segment + 1).y;
+    	if(isAtTheEnd())  return line.get(line.size()-1);
 
-    	int dX = endX - startX;
-    	int dY = endY - startY;
- 	
-    	int ballX = startX + (int) (dX*percentage);
-    	int ballY = startY + (int) (dY*percentage);
+    	int startX = line.get(pos).x;
+    	int startY = line.get(pos).y;
     	
-        return new Coordinate(ballX, ballY);    
+        return new Coordinate(startX, startY);
     }
     
     public void updatepos() {
 		if (isAtTheEnd())
 			return;
 
-    	int startX = path.get(segment).x;
-    	int endX = path.get(segment + 1).x;
+    	int startX = line.get(pos).x;
+    	int endX = line.get(pos + 1).x;
     	
-    	int startY = path.get(segment).y;
-    	int endY = path.get(segment + 1).y;
+    	int startY = line.get(pos).y;
+    	int endY = line.get(pos + 1).y;
 
-		segment ++;
+		pos++;
     }
 }
