@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GameField implements Runnable{
-    private PathPoints line;
+    private PathPoints line1, line2, line3, line4;
     private GamePanel gamePanel;
     private GameStage gameStage;
     private int frameCounter;
@@ -80,9 +80,18 @@ public class GameField implements Runnable{
         lastTime = System.currentTimeMillis();
 
         ClassLoader myLoader = this.getClass().getClassLoader();
-        InputStream pointStream = myLoader.getResourceAsStream("resources/line.txt");
-        Scanner s = new Scanner (pointStream);
-        line  = new PathPoints(s);
+        InputStream normalline = myLoader.getResourceAsStream("line/normalline.txt");
+        Scanner s1 = new Scanner (normalline);
+        line1 = new PathPoints(s1);
+        InputStream tankerline = myLoader.getResourceAsStream("line/tankerline.txt");
+        Scanner s2 = new Scanner (tankerline);
+        line2 = new PathPoints(s2);
+        InputStream smallline = myLoader.getResourceAsStream("line/smallline.txt");
+        Scanner s3 = new Scanner (smallline);
+        line3 = new PathPoints(s3);
+        InputStream bossline = myLoader.getResourceAsStream("line/bossline.txt");
+        Scanner s4 = new Scanner (bossline);
+        line4 = new PathPoints(s4);
 
         enemies = new LinkedList<Enemy>();
         towers = new LinkedList<Tower>();
@@ -122,7 +131,7 @@ public class GameField implements Runnable{
                 bullets.remove(b);
         }
         for (Enemy e : new LinkedList<Enemy>(enemies)) {
-            e.advance();
+            e.updatepos();
             if (e.getPosition().isAtTheEnd()) {
                 enemies.remove(e);
                 livesCounter--;
@@ -186,30 +195,30 @@ public class GameField implements Runnable{
 
     public void generateEnemies() {
         if(frameCounter % 30 == 0) {
-            enemies.add(new NormalEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
         }
         else if(frameCounter % 25 == 0 && frameCounter >= 50) {
-            enemies.add(new NormalEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
 
         }
         else if(frameCounter % 20 == 0 && frameCounter >= 100) {
-            enemies.add(new NormalEnemy(line.getStart()));
-            enemies.add(new SmallerEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
+            enemies.add(new SmallerEnemy(line3.getStart()));
         }
         else if(frameCounter % 15 == 0 && frameCounter >= 150) {
-            enemies.add(new NormalEnemy(line.getStart()));
-            enemies.add(new SmallerEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
+            enemies.add(new SmallerEnemy(line3.getStart()));
         }
         else if(frameCounter % 10 == 0 && frameCounter >= 200) {
-            enemies.add(new NormalEnemy(line.getStart()));
-            enemies.add(new SmallerEnemy(line.getStart()));
-            enemies.add(new TankerEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
+            enemies.add(new TankerEnemy(line2.getStart()));
+            enemies.add(new SmallerEnemy(line3.getStart()));
         }
         else if(frameCounter % 5 == 0 && frameCounter >= 250) {
-            enemies.add(new NormalEnemy(line.getStart()));
-            enemies.add(new SmallerEnemy(line.getStart()));
-            enemies.add(new TankerEnemy(line.getStart()));
-            enemies.add(new BossEnemy(line.getStart()));
+            enemies.add(new NormalEnemy(line1.getStart()));
+            enemies.add(new TankerEnemy(line2.getStart()));
+            enemies.add(new SmallerEnemy(line3.getStart()));
+            enemies.add(new BossEnemy(line4.getStart()));
         }
     }
 

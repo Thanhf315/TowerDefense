@@ -7,9 +7,9 @@ import java.util.*;
 public class PathPoints {
 	private List <Coordinate> path;
 	public PathPoints(Scanner s) {
-		path = new ArrayList<Coordinate>();		
-		int counter = s.nextInt(); 			
-		
+		path = new ArrayList<Coordinate>();
+		int counter = s.nextInt();
+
 		for(int n = 0; n < counter; n++) {
 			Coordinate c = new Coordinate(s.nextInt(), s.nextInt());	
 			path.add(c);	

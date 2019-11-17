@@ -5,10 +5,10 @@ import java.awt.*;
 abstract public class Enemy implements GameEntity {
 	protected PathPosition position;	
 	protected Image enemy;
-	protected int width, height, speed, armor, health, reward;
+	protected int width, height, armor, health, reward;
 
-	public void advance() {
-		position.advance(10 + speed);
+	public void updatepos() {
+		position.updatepos();
 	}
 	
 	public void draw(Graphics g) {

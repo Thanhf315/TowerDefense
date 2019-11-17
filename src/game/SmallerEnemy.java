@@ -9,7 +9,6 @@ public class SmallerEnemy extends Enemy {
 		this.width = 80;
 		this.height = 80;
 		this.health = 50;
-		this.speed = 4;
 		this.armor = 0;
 		this.reward = 2;
 	}

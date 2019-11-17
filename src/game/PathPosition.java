@@ -38,26 +38,16 @@ public class PathPosition {
         return new Coordinate(ballX, ballY);    
     }
     
-    public void advance (double distance) {
-        if(isAtTheEnd())
-        	return;		
+    public void updatepos() {
+		if (isAtTheEnd())
+			return;
+
     	int startX = path.get(segment).x;
     	int endX = path.get(segment + 1).x;
     	
     	int startY = path.get(segment).y;
     	int endY = path.get(segment + 1).y;
-    	
-    	int dX = endX - startX;
-    	int dY = endY - startY;
-    	
-    	double length = Math.sqrt((double) (dX*dX) + (double) (dY*dY));
-    	double unit = 1/length;	
-    	percentage += unit*distance;	
-    	if(percentage > 1) {
-    		segment ++;										
-    		distance = distance-(1-percentage)*length;	
-    		percentage = 0;									
-    		advance(distance);						
-    	}
+
+		segment ++;
     }
 }

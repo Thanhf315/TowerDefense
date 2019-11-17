@@ -7,9 +7,7 @@ public class BossEnemy extends Enemy {
 		this.position = p;
 		this.width = 200;
 		this.height = 200;
-		this.speed = 1;
 		this.health = 500;
-		this.speed = 3;
 		this.armor = 8;
 		this.reward = 10;
 	}
