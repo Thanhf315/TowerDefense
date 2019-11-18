@@ -152,9 +152,8 @@ public class GameField implements Runnable{
             lives = 0;
         }
 
-        if (killsCounter >= 500) {
+        if (killsCounter >= 300) {
             gameIsWon = true;
-            killsCounter = 500;
         }
         gameStage = GameStage.DRAW;
     }
@@ -166,7 +165,7 @@ public class GameField implements Runnable{
         new DrawMap(g);
         g.setColor(Color.BLACK);
         g.drawString("Lives: "  + lives, 1450, 75);
-        g.drawString("Reward: " + Reward, 1450, 100);
+        g.drawString("Cost: " + Reward, 1450, 100);
 
         for(Tower t: new LinkedList<Tower>(towers))
             t.draw(g);
@@ -202,20 +201,20 @@ public class GameField implements Runnable{
             enemies.add(new NormalEnemy(line1.getStart()));
 
         }
-        else if(frameCounter % 30 == 0 && frameCounter >= 100) {
+        else if(frameCounter % 50 == 0 && frameCounter >= 100) {
             enemies.add(new NormalEnemy(line1.getStart()));
             enemies.add(new SmallerEnemy(line3.getStart()));
         }
-        else if(frameCounter % 30 == 0 && frameCounter >= 150) {
+        else if(frameCounter % 100 == 0 && frameCounter >= 150) {
             enemies.add(new NormalEnemy(line1.getStart()));
             enemies.add(new SmallerEnemy(line3.getStart()));
         }
-        else if(frameCounter % 30 == 0 && frameCounter >= 200) {
+        else if(frameCounter % 200 == 0 && frameCounter >= 200) {
             enemies.add(new NormalEnemy(line1.getStart()));
             enemies.add(new TankerEnemy(line2.getStart()));
             enemies.add(new SmallerEnemy(line3.getStart()));
         }
-        else if(frameCounter % 30 == 0 && frameCounter >= 250) {
+        else if(frameCounter % 300 == 0 && frameCounter >= 250) {
             enemies.add(new NormalEnemy(line1.getStart()));
             enemies.add(new TankerEnemy(line2.getStart()));
             enemies.add(new SmallerEnemy(line3.getStart()));
